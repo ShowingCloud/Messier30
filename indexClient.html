@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>测试JSON-RPC</title>
+		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery.jsonrpc.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+		  $.jsonRPC.setup({
+			endPoint: "http://localhost:10080",
+			namespace: ''
+		  });
+		  $("#evaluate").click(function() {
+			$.jsonRPC.request('add', {
+			  params: [$("num1").val(), $('num2').val()],
+			  success: function(data) {
+				//$("<p />").text(data.result).appendTo($("p#result"));
+				alert(data.result);
+			  },
+			  error: function(data) {
+				$("<p />").text(data.error.message).appendTo($("p#result"));
+			  }
+			});
+		  });
+		});
+		</script>
+  </head>
+  <body>
+    <input type="number" name="num1" id="num1" />+<input type="number" name="num2" id="num2" />
+    <p><input name="evaluate" id="evaluate" value="evaluate" type="button"/></p>
+  </body>
+</html>
